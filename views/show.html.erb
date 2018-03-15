@@ -1,0 +1,28 @@
+<%= @post.title %>
+<%= @post.body %>
+<% @comments.each do |comment| %>
+  <ul>
+    <li><%= comment.title %></li>
+    <li><%= comment.body %></li>
+  </ul>
+<% end %>
+<%= @comments.count %>
+<%= form('/comments', :create) %>
+
+<%= label :comment, :title %>
+<%= input :comment, :title %>
+
+<%= label :comment, :body %>
+<%= input :comment, :body %>
+
+<div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
+
+<%= submit  %>
+
+<% @posts.each do |post| %>
+
+  <ul>
+    <li><%= post.title %></li>
+  </ul>
+
+<% end %>
