@@ -6,6 +6,7 @@ require 'sinatra/reloader' if development?
 
 set :database, {adapter: "sqlite3", database: "art_site.sqlite3"}
 set :erb, layout: :'layout.html'
+#set :public_folder, File.dirname(__FILE__) + '/static'
 
 class Post < ActiveRecord::Base
   has_many :comments

@@ -1,9 +1,13 @@
 <html>
   <head>
     <title><%= @title %></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/application.css">
   </head>
   <body>
+    <div class="container">
     <h1>Headers</h1>
     <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,9 +1,12 @@
 <%= form('/posts', :create) %>
 
-<%= label :post, :title %>
-<%= input :post, :title %>
-
-<%= label :post, :body %>
-<%= input :post, :body %>
+<ul>
+  <li><%= label :post, :title %></li>
+  <li><%= input :post, :title %></li>
+</ul>
+<ul>
+  <li><%= label :post, :body %></li>
+  <li><textarea id="post_body" name="post[body]"></textarea></li>
+</ul>
 
 <%= submit %>

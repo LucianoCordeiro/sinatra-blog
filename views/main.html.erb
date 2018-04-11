@@ -1,12 +1,21 @@
-<%= @lastpost.title %>
-
-
+<div class="row">
+<div class="col-lg-9">
+<% if Post.count > 0 %>
+  <ul>
+    <li><%= @lastpost.title %></li>
+    <li><%= @lastpost.body %></li>
+  </ul>
+<% end %>
+</div>
+<div class="col-lg-3">
 <% @posts.each do |post| %>
 
 <% if post.title != @lastpost.title %>
   <ul>
-    <li><%= post.title %></li>
+    <li><a href="/get/<%= post.id %>"><%= post.title %></a></li>
   </ul></br>
 <% end %>
 
 <% end %>
+</div>
+</div>

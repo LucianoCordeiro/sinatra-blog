@@ -1,28 +1,42 @@
+<div class="row">
+<div class="col-lg-9">
+
 <%= @post.title %>
 <%= @post.body %>
+
+<%= @comments.count %>
+
 <% @comments.each do |comment| %>
   <ul>
     <li><%= comment.title %></li>
     <li><%= comment.body %></li>
   </ul>
 <% end %>
-<%= @comments.count %>
+
+
+
 <%= form('/comments', :create) %>
 
-<%= label :comment, :title %>
-<%= input :comment, :title %>
+<ul>
+  <li><%= label :comment, :title %></li>
+  <li><%= input :comment, :title %></li>
 
-<%= label :comment, :body %>
-<%= input :comment, :body %>
-
-<div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
+  <li><%= label :comment, :body %></li>
+  <li><%= input :comment, :body %></li>
+</ul>
 
 <%= submit  %>
 
+<div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
+
+</div>
+<div class="col-lg-3">
 <% @posts.each do |post| %>
 
   <ul>
-    <li><%= post.title %></li>
+    <li><a href="/get/<%= post.id %>"><%= post.title if post != @post %></a></li>
   </ul>
 
 <% end %>
+</div>
+</div>
