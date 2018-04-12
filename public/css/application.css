@@ -8,11 +8,22 @@ ul {
 }
 
 h1 {
-  color: red;
+  color: blue;
   text-align: center;
+}
+
+p {
+  text-indent: 45px;
+  font-size: 16px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 textarea {
   height: 400px;
   width: 800px;
+}
+
+i {
+  font-size: 13px;
 }

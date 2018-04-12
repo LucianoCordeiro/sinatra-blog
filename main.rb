@@ -3,10 +3,8 @@ require 'sinatra/activerecord'
 require 'sinatra/form_helpers'
 require 'sinatra/reloader' if development?
 
-
 set :database, {adapter: "sqlite3", database: "art_site.sqlite3"}
 set :erb, layout: :'layout.html'
-#set :public_folder, File.dirname(__FILE__) + '/static'
 
 class Post < ActiveRecord::Base
   has_many :comments
@@ -27,8 +25,8 @@ get '/' do
   erb :'main.html'
 end
 
-get '/get/:id' do
-  @post = Post.find(params[:id])
+get '/artigos/:title' do
+  @post = Post.find_by(title: params['title'].gsub('_', ' '))
   @posts = Post.all
   @comments = @post.comments
   erb :'show.html'
@@ -49,6 +47,6 @@ end
 post '/comments' do
   @comment = Comment.create(params[:comment])
   if @comment.save
-    redirect "/get/#{@comment.post_id}"
+    redirect "/get/#{@comment.post.title.gsub(' ', '_')}"
   end
 end

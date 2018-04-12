@@ -1,42 +1,42 @@
 <div class="row">
-<div class="col-lg-9">
+  <div class="col-lg-9">
 
-<%= @post.title %>
-<%= @post.body %>
+    <h2><%= @post.title %></h2>
+    <i>Criado por Luciano em <%= @post.created_at.strftime("%d/%m/%Y") %></i>
+    <p><%= @post.body %></p>
 
-<%= @comments.count %>
+    <h4><%= @comments.count %> comentários</h4>
 
-<% @comments.each do |comment| %>
-  <ul>
-    <li><%= comment.title %></li>
-    <li><%= comment.body %></li>
-  </ul>
-<% end %>
+    <% @comments.each do |comment| %>
+      <ul>
+        <li><%= comment.title %></li>
+        <li><%= comment.body %></li>
+      </ul>
+    <% end %>
 
+    <%= form('/comments', :create) %>
 
+    <ul>
+      <li><%= label :comment, :title %></li>
+      <li><%= input :comment, :title %></li>
 
-<%= form('/comments', :create) %>
+      <li><%= label :comment, :body %></li>
+      <li><%= input :comment, :body %></li>
+    </ul>
 
-<ul>
-  <li><%= label :comment, :title %></li>
-  <li><%= input :comment, :title %></li>
+    <%= submit  %>
 
-  <li><%= label :comment, :body %></li>
-  <li><%= input :comment, :body %></li>
-</ul>
+    <div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
+  </div>
 
-<%= submit  %>
+  <div class="col-lg-3">
+    <h4>Outras postagens:</h4>
+    <% @posts.reverse.each do |post| %>
 
-<div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
+      <ul>
+        <li><a href="/artigos/<%= post.title.gsub(' ', '_') %>"><%= post.title if post != @post %></a></li>
+      </ul>
 
-</div>
-<div class="col-lg-3">
-<% @posts.each do |post| %>
-
-  <ul>
-    <li><a href="/get/<%= post.id %>"><%= post.title if post != @post %></a></li>
-  </ul>
-
-<% end %>
-</div>
+    <% end %>
+  </div>
 </div>
