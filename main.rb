@@ -7,7 +7,7 @@ set :database, {adapter: "sqlite3", database: "art_site.sqlite3"}
 set :erb, layout: :'layout.html'
 
 class Post < ActiveRecord::Base
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end
 
 class Comment < ActiveRecord::Base
@@ -26,7 +26,8 @@ get '/' do
 end
 
 get '/artigos/:title' do
-  @post = Post.find_by(title: params['title'].gsub('_', ' '))
+  @title = converter(params['title'])
+  @post = Post.find_by(title: @title)
   @posts = Post.all
   @comments = @post.comments
   erb :'show.html'
@@ -46,7 +47,27 @@ end
 
 post '/comments' do
   @comment = Comment.create(params[:comment])
+  @comment.body.gsub!(/\n+/, '<br>')
   if @comment.save
-    redirect "/get/#{@comment.post.title.gsub(' ', '_')}"
+    redirect "/artigos/#{converter(@comment.post.title)}"
   end
+end
+
+helpers do
+
+  def formatted_count(comments_count)
+    if comments_count == 0
+      "Nenhum comentário. Seja o primeiro a comentar!"
+    elsif comments_count == 1
+      "1 comentário"
+    else
+      "#{comments_count} comentários"
+    end
+  end
+
+  def converter(title)
+    return title if !title.include?('_') && !title.include?(' ')
+    title.include?('_') ? title.gsub('_', ' ') : title.gsub(' ', '_')
+  end
+
 end

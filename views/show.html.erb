@@ -1,27 +1,34 @@
 <div class="row">
-  <div class="col-lg-9">
+  <div class="col-lg-8">
+    <div class="text">
+      <h2><%= @post.title %></h2>
+      <h5><i>Publicado por <b>Luciano</b> em <%= @post.created_at.strftime("%d/%m/%Y") %></i></h5><br>
+      <h4 class='body'><%= @post.body %></h4>
+    </div>
 
-    <h2><%= @post.title %></h2>
-    <i>Criado por Luciano em <%= @post.created_at.strftime("%d/%m/%Y") %></i>
-    <p><%= @post.body %></p>
+    <h4><%= formatted_count(@comments.count) %></h4>
+    <div id="comment_box">
+      <% @comments.each do |comment| %>
+        <div id="each_comment">
+          <h4 id="comment_title"><%= comment.author %></h4>
+          <h5 id="comment_bodye"><%= comment.body %></h5>
+          <h6>Postado em <%= comment.created_at.strftime("%d/%m/%Y") %></h6>
+        </div>
+      <% end %>
+    </div>
 
-    <h4><%= @comments.count %> comentários</h4>
-
-    <% @comments.each do |comment| %>
-      <ul>
-        <li><%= comment.title %></li>
-        <li><%= comment.body %></li>
-      </ul>
+    <% if @comments.count > 0 %>
+      <h4>Deixe seu comentário:</h4>
     <% end %>
 
     <%= form('/comments', :create) %>
 
     <ul>
-      <li><%= label :comment, :title %></li>
-      <li><%= input :comment, :title %></li>
+      <li><%= label :comment, :author %></li>
+      <li><%= input :comment, :author %></li>
 
-      <li><%= label :comment, :body %></li>
-      <li><%= input :comment, :body %></li>
+      <li><%= label :comment, :Texto %></li>
+      <li><textarea id="comment_body" name="comment[body]"></textarea></li>
     </ul>
 
     <%= submit  %>
@@ -29,13 +36,13 @@
     <div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
   </div>
 
-  <div class="col-lg-3">
-    <h4>Outras postagens:</h4>
-    <% @posts.reverse.each do |post| %>
-
-      <ul>
-        <li><a href="/artigos/<%= post.title.gsub(' ', '_') %>"><%= post.title if post != @post %></a></li>
-      </ul>
+  <div class="col-lg-3 col-lg-offset-1">
+    <h3 class="others">Outras postagens:</h3>
+    <% @posts.reverse.take(7).each do |post| %>
+      <div class="snippet">
+        <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title if post != @post %></a></h4>
+        <h5><%= post.body[0..200] + "..." if post != @post %></h5>
+      </div>
 
     <% end %>
   </div>

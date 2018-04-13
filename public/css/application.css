@@ -1,5 +1,6 @@
 body {
   text-align: left;
+  font-family: "Roboto";
 }
 
 ul {
@@ -8,15 +9,8 @@ ul {
 }
 
 h1 {
-  color: blue;
+  color: green;
   text-align: center;
-}
-
-p {
-  text-indent: 45px;
-  font-size: 16px;
-  text-align: justify;
-  text-justify: inter-word;
 }
 
 textarea {
@@ -25,5 +19,51 @@ textarea {
 }
 
 i {
-  font-size: 13px;
+  font-size: 14px;
+}
+
+.body {
+  line-height: 1.6;
+}
+
+.snippet {
+  padding-bottom: 4px;
+}
+
+.others {
+  padding-bottom: 15px;
+}
+
+.text {
+  border-bottom: solid black 1px;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+#comment_title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#comment_body {
+  height: 180px;
+  width: 360px;
+}
+
+#comment_bodye {
+  font-size: 15px;
+  padding-bottom: 8px;
+  line-height: 1.3;
+}
+
+#comment_box {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+#each_comment {
+  margin-top: 10px;
+  background-color: #eaffea;
+  padding: 6px 20px 10px 20px;
+  border-radius: 5px;
 }

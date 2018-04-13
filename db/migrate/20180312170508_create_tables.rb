@@ -8,7 +8,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :comments do |t|
       t.belongs_to :post, index: true
-      t.string :title
+      t.string :author
       t.string :body
       t.timestamps
     end

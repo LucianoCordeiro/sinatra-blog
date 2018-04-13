@@ -1,44 +1,48 @@
 <div class="row">
-  <div class="col-lg-9">
-    <% if Post.count > 0 %>
-      <h2><%= @lastpost.title %></h2>
-      <%= @lastpost.body %>
-    <% end %>
+  <div class="col-lg-8">
 
-    <h4><%= @lastpost.comments.count %> comentários</h4>
+        <div class="text">
+          <h2><%= @lastpost.title %></h2>
+          <h5 class="title"><i>Criado por <b>Luciano</b> em <%= @lastpost.created_at.strftime("%d/%m/%Y") %></i></h5><br>
+          <h4><%= @lastpost.body %></h4>
+        </div>
 
-    <% @lastpost.comments.each do |comment| %>
-      <ul>
-        <li><%= comment.title %></li>
-        <li><%= comment.body %></li>
-      </ul>
-    <% end %>
 
-    <%= form('/comments', :create) %>
+        <h4><%= formatted_count(@lastpost.comments.count) %></h4>
 
-    <ul>
-      <li><%= label :comment, :title %></li>
-      <li><%= input :comment, :title %></li>
+        <% @lastpost.comments.each do |comment| %>
+          <ul>
+            <li><%= comment.author %></li>
+            <li><%= comment.body %></li>
+          </ul>
+        <% end %>
 
-      <li><%= label :comment, :body %></li>
-      <li><%= input :comment, :body %></li>
-    </ul>
+        <%= form('/comments', :create) %>
 
-    <%= submit  %>
+        <ul>
+          <li><%= label :comment, :author %></li>
+          <li><%= input :comment, :author %></li>
 
-    <div style="visibility:hidden;"><%= input :comment, :post_id, value: @lastpost.id %></div>
+          <li><%= label :comment, :body %></li>
+          <li><%= input :comment, :body %></li>
+        </ul>
+
+        <%= submit  %>
+
+        <div style="visibility:hidden;"><%= input :comment, :post_id, value: @lastpost.id %></div>
 
 
   </div>
 
-  <div class="col-lg-3">
-    <h4>Últimas postagens:</h4>
+  <div class="col-lg-3 col-lg-offset-1">
+    <h3 class="others">Últimas postagens:</h3>
     <% @posts.reverse.each do |post| %>
 
       <% if post.title != @lastpost.title %>
-        <ul>
-          <li><a href="/artigos/<%= post.title.gsub(' ', '_') %>"><%= post.title %></a></li>
-        </ul>
+        <div class="snippet">
+          <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
+          <h5><%= post.body[0..200] + "..."%></h5>
+        </div>
       <% end %>
 
     <% end %>
