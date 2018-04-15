@@ -34,6 +34,7 @@ get '/artigos/:title' do
 end
 
 get '/new' do
+  @posts = Post.all
   @post = Post.new
   erb :'new.html'
 end
@@ -52,6 +53,28 @@ post '/comments' do
     redirect "/artigos/#{converter(@comment.post.title)}"
   end
 end
+
+get '/artigos/:title/edit' do
+  @title = converter(params['title'])
+  @post = Post.find_by(title: @title)
+  erb :'edit.html'
+end
+
+put '/artigos/:title' do
+  @title = converter(params['title'])
+  @post = Post.find_by(title: @title)
+  if @post.update(params[:post])
+    redirect "/new"
+    json 'Cat has been updated'
+  end
+  erb :'edit.html'
+end
+
+delete '/artigos/:id' do
+  Post.destroy(params['id'])
+  redirect "/new"
+end
+
 
 helpers do
 

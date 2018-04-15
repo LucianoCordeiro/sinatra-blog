@@ -9,8 +9,14 @@ ul {
 }
 
 h1 {
-  color: green;
-  text-align: center;
+  color: white;
+  
+  margin-top: -23px;
+  font-size: 40px !important;
+}
+
+h1 span {
+  color: #ffff32;
 }
 
 textarea {
@@ -18,8 +24,18 @@ textarea {
   width: 800px;
 }
 
-i {
-  font-size: 14px;
+footer {
+  text-align: center;
+  color: white;
+  background-color: #245c89;
+  padding: 30px;
+  margin-top: 50px;
+}
+
+.jumbotron {
+  background-color: #245c89;
+  color: white;
+  height: 90px;
 }
 
 .body {
@@ -63,7 +79,7 @@ i {
 
 #each_comment {
   margin-top: 10px;
-  background-color: #eaffea;
+  background-color: #e9eff4;
   padding: 6px 20px 10px 20px;
   border-radius: 5px;
 }

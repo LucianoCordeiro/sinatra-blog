@@ -1,0 +1,12 @@
+<%= form("/artigos/#{converter(@post.title)}", :put) %>
+
+<ul>
+  <li><%= label :post, :title %></li>
+  <li><%= input :post, :title, value: @post.title %></li>
+</ul>
+<ul>
+  <li><%= label :post, :body %></li>
+  <li><textarea id="post_body" name="post[body]"><%= @post.body %></textarea></li>
+</ul>
+
+<%= submit %>
