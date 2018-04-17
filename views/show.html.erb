@@ -34,18 +34,21 @@
     <%= submit  %>
 
     <div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
+
   </div>
 
   <div class="col-lg-3 col-lg-offset-1">
-    <h3 class="others">Missão da página:</h3>
-      <h4>Traduzir e transmitir o pensamento dos principais filósofos e pensadores contemporâneos do mundo.</h4>
-    <h3 class="others">Outras postagens:</h3>
+      <h4 class="mission" align="center">Missão desta página:
+        Traduzir os escritos e transmitir o pensamento dos principais filósofos e pensadores contemporâneos do mundo.
+      </h4>
+    <h3 class="others">Veja também:</h3>
     <% @posts.reverse.take(7).each do |post| %>
-      <div class="snippet">
-        <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title if post != @post %></a></h4>
-        <h5><%= post.body[0..200] + "..." if post != @post %></h5>
-      </div>
-
+      <% if post != @post %>
+        <div class="snippet">
+          <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
+          <h5><%= post.body[0..200] + "..." %></h5>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

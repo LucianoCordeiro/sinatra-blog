@@ -9,14 +9,9 @@ ul {
 }
 
 h1 {
-  color: white;
-  
+  color: green;
   margin-top: -23px;
   font-size: 40px !important;
-}
-
-h1 span {
-  color: #ffff32;
 }
 
 textarea {
@@ -28,7 +23,7 @@ footer {
   text-align: center;
   color: white;
   background-color: #245c89;
-  padding: 30px;
+  padding: 20px;
   margin-top: 50px;
 }
 
@@ -42,18 +37,34 @@ footer {
   line-height: 1.6;
 }
 
+.col-lg-3 {
+  background-color: #fbfbfb;
+  margin-top: 30px;
+}
+
 .snippet {
-  padding-bottom: 4px;
+  padding: 7px 0;
+  border-bottom: solid #e4e4e4 1.5px;
+}
+
+.mission {
+  font-size: 17px;
+  margin-top: 35px;
 }
 
 .others {
-  padding-bottom: 15px;
+  margin-top: 40px;
 }
 
 .text {
   border-bottom: solid black 1px;
   padding-bottom: 30px;
   margin-bottom: 20px;
+}
+
+.inline li {
+  display: inline;
+  margin-right: 15px;
 }
 
 #comment_title {
@@ -82,4 +93,56 @@ footer {
   background-color: #e9eff4;
   padding: 6px 20px 10px 20px;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 980px) {
+
+  h1 {
+    font-size: 65px !important;
+  }
+
+  h2 {
+    font-size: 52px
+  }
+
+  h4 {
+    font-size: 40px;
+  }
+
+  h5 {
+    font-size: 27px;
+  }
+
+  h6, small {
+    font-size: 21px;
+  }
+
+  footer {
+    padding: 27px;
+  }
+
+  .jumbotron {
+    height: 120px;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .body {
+    line-height: 1.3;
+  }
+
+  .mission {
+    font-size: 35px;
+  }
+
+  .others {
+    font-size: 46px;
+  }
+
+  #comment_title, #comment_bodye {
+    font-size: 30px;
+  }
+
 }

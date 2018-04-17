@@ -1,4 +1,6 @@
-<%= form('/posts', :create) %>
+<a href='/logout'>Log Out</a>
+
+<form action="/posts" method="post">
 
 <ul>
   <li><%= label :post, :title %></li>
@@ -8,18 +10,18 @@
   <li><%= label :post, :body %></li>
   <li><textarea id="post_body" name="post[body]"></textarea></li>
 </ul>
+<input type="submit" value="Criar"><br><br><br>
+</form>
 
-<%= submit %><br>
-
-<ul>
   <% @posts.each do |post| %>
 
-    <li><%= post.title %> <a href="/artigos/<%= converter(post.title) %>/edit">Edit</a> </li>
-
-    <form action="/artigos/<%= post.id %>" method="post">
+  <ul class="inline">
+    <form class="input" action="/artigos/<%= post.id %>" method="post">
       <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete Article?">
+      <li><%= post.title %></li>
+      <li><a class="edit_delete" href="/artigos/<%= converter(post.title) %>/edit">Editar</a></li>
+      <li><input type="submit" value="Deletar artigo" onclick="return deletePost()"></li>
     </form>
+  </ul>
 
   <% end %>
-</ul>
