@@ -1,5 +1,11 @@
+<% if flash.has?(:error) %>
+  <div id="error">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
 <form action="/login" method="post">
-    <p><input id="user_name" name="user[name]" type="text"></p>
-    <p><input id="user_password" name="user[password]" type="password"></p>
+    <p><input id="user_name" name="user[name]" type="text" placeholder="Nome"></p>
+    <p><input id="user_password" name="user[password]" type="password" placeholder="Senha"></p>
     <p><input type="submit" value="Login"></p>
 </form>

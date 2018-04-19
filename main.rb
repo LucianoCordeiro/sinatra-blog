@@ -2,11 +2,20 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/form_helpers'
 require 'sinatra/reloader' if development?
+require 'rack-flash'
 require_relative 'models.rb'
 
 set :database, {adapter: "sqlite3", database: "art_site.sqlite3"}
 set :erb, layout: :'layout.html'
 enable :sessions
+use Rack::Flash
+
+class Search
+  attr_reader :input
+  def initialize(input)
+    @input = input
+  end
+end
 
 before do
   params.delete(:captures)
@@ -16,6 +25,9 @@ before '/new' do
   logged_in_user?
 end
 
+after do
+  session[:previous_path] = request.url
+end
 
 ['/artigos/:title', '/artigos/:title/edit'].each do |path|
   before path do
@@ -24,7 +36,7 @@ end
   end
 end
 
-['/', '/*'].each do |path|
+['/', '/new', '/search', '/artigos/:title'].each do |path|
   before path do
     @posts = Post.all
   end
@@ -38,10 +50,13 @@ end
 
 get '/artigos/:title' do
   @comments = @post.comments
+  @previous_request = session[:current_request]
+  session.delete(:current_request)
   erb :'show.html'
 end
 
 get '/new' do
+  @user = User.find_by(id: session[:id])
   erb :'new.html'
 end
 
@@ -56,6 +71,7 @@ post '/comments' do
   @comment = Comment.create(params[:comment])
   @comment.body.gsub!(/\n+/, '<br>')
   if @comment.save
+    session[:current_request] = request.url
     redirect "/artigos/#{converter(@comment.post.title)}"
   end
 end
@@ -67,7 +83,6 @@ end
 put '/artigos/:title' do
   if @post.update(params[:post])
     redirect '/new'
-    json 'Cat has been updated'
   end
   erb :'edit.html'
 end
@@ -75,6 +90,20 @@ end
 delete '/artigos/:id' do
   Post.destroy(params['id'])
   redirect '/new'
+end
+
+post '/search' do
+  search = Search.new(params[:search][:input])
+  previous_path = session[:previous_path]
+  redirect "#{previous_path}" if search.input == ""
+  session[:input] = search.input
+  redirect '/search'
+end
+
+get '/search' do
+  @search_input = /#{session[:input]}/
+  session.delete(:input)
+  erb :'search.html'
 end
 
 get '/login' do
@@ -87,6 +116,7 @@ post '/login' do
     session[:id] = @user.id
     redirect '/new'
   else
+    flash[:error] = "Nome e/ou senha inválidos"
     redirect '/login'
   end
 end

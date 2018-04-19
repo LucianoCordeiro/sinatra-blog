@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-lg-8">
-
+    <% if Post.count > 0 %>
         <div class="text">
           <h2><%= @lastpost.title %></h2>
-          <h5 class="title"><i>Criado por <b>Luciano</b> em <%= @lastpost.created_at.strftime("%d/%m/%Y") %></i></h5><br>
+          <h5 class="title"><i>Criado por <b><%= @lastpost.user.name %></b> em <%= @lastpost.created_at.strftime("%d/%m/%Y") %></i></h5><br>
           <h4><%= @lastpost.body %></h4>
         </div>
 
@@ -30,7 +30,7 @@
         <%= submit  %>
 
         <div style="visibility:hidden;"><%= input :comment, :post_id, value: @lastpost.id %></div>
-
+    <% end %>
 
   </div>
 

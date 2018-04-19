@@ -2,15 +2,16 @@
 
 <form action="/posts" method="post">
 
-<ul>
-  <li><%= label :post, :title %></li>
-  <li><%= input :post, :title %></li>
-</ul>
-<ul>
-  <li><%= label :post, :body %></li>
-  <li><textarea id="post_body" name="post[body]"></textarea></li>
-</ul>
-<input type="submit" value="Criar"><br><br><br>
+  <ul>
+    <li><%= label :post, :title %></li>
+    <li><%= input :post, :title %></li>
+  </ul>
+  <ul>
+    <li><%= label :post, :body %></li>
+    <li><textarea id="post_body" name="post[body]"></textarea></li>
+  </ul>
+  <div style="visibility:hidden;"><%= input :post, :user_id, value: @user.id %></div>
+  <input type="submit" value="Criar"><br><br><br>
 </form>
 
   <% @posts.each do |post| %>

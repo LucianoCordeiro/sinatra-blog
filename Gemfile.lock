@@ -27,6 +27,8 @@ GEM
     multi_json (1.13.1)
     mustermann (1.0.2)
     rack (2.0.4)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (2.0.1)
       rack
     rake (12.3.0)
@@ -57,6 +59,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt!
+  rack-flash3
   rake
   sinatra
   sinatra-activerecord

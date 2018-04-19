@@ -1,0 +1,14 @@
+<div class="search_result">
+
+  <div id="search_result">
+    <h3>Artigos encontrados:</h3><br>
+    <% @posts.each do |post| %>
+      <% if post.title =~ @search_input %>
+        <h4><a href="artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
+        <% end %>
+      <% end %>
+      <br>
+    <h5><a href="/">Voltar</a>
+    </div>
+
+</div>

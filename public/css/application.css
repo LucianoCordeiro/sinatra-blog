@@ -8,12 +8,6 @@ ul {
   padding-left: 0px;
 }
 
-h1 {
-  color: green;
-  margin-top: -23px;
-  font-size: 40px !important;
-}
-
 textarea {
   height: 400px;
   width: 800px;
@@ -29,8 +23,13 @@ footer {
 
 .jumbotron {
   background-color: #245c89;
-  color: white;
   height: 90px;
+}
+
+.jumbotron h1 {
+  color: white;
+  margin-top: -23px;
+  font-size: 40px;
 }
 
 .body {
@@ -67,6 +66,22 @@ footer {
   margin-right: 15px;
 }
 
+.search_result {
+  visibility: hidden;
+}
+
+#search_result {
+  visibility: visible;
+}
+
+#button_search {
+  padding: 4px 4px 4.5px 4px;
+}
+
+#comment_author {
+  margin-top: 7px;
+}
+
 #comment_title {
   font-size: 15px;
   font-weight: bold;
@@ -93,6 +108,15 @@ footer {
   background-color: #e9eff4;
   padding: 6px 20px 10px 20px;
   border-radius: 5px;
+}
+
+#error {
+  color: red;
+}
+
+#search {
+  text-align: right;
+  margin-top: -12px;
 }
 
 @media screen and (max-width: 980px) {
