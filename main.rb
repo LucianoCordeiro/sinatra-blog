@@ -50,8 +50,8 @@ end
 
 get '/artigos/:title' do
   @comments = @post.comments
-  @previous_request = session[:current_request]
-  session.delete(:current_request)
+  @previous_request = session[:previous_path]
+  @post_comment_request = session[:post_comment_path]
   erb :'show.html'
 end
 
@@ -71,7 +71,7 @@ post '/comments' do
   @comment = Comment.create(params[:comment])
   @comment.body.gsub!(/\n+/, '<br>')
   if @comment.save
-    session[:current_request] = request.url
+    session[:post_comment_path] = request.url
     redirect "/artigos/#{converter(@comment.post.title)}"
   end
 end

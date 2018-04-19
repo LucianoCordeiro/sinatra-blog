@@ -33,8 +33,7 @@
     <div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
 
     </form>
-
-    <% if @previous_request != nil %>
+    <% if @previous_request == @post_comment_request %>
       <script>document.body.scrollTop = 10000;</script>
     <% end %>
   </div>
