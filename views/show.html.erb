@@ -21,18 +21,18 @@
       <h4>Deixe seu comentário:</h4>
     <% end %>
 
-    <form action="/comments" method="post" class="remote">
+    <form action="/comments" method="post">
 
-    <ul>
-      <li><input id="comment_author" name="comment[author]" type="text" placeholder="Nome"></li><br>
-      <li><textarea id="comment_body" name="comment[body]" placeholder="Insira seu texto..."></textarea></li>
-    </ul>
+      <ul>
+        <li><input id="comment_author" name="comment[author]" type="text" placeholder="Nome"></li><br>
+        <li><textarea id="comment_body" name="comment[body]" placeholder="Insira seu texto..."></textarea></li>
+      </ul>
 
-    <input type="submit" value="Enviar">
+      <input type="submit" value="Enviar">
 
-    <div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
+      <div style="visibility:hidden;"><%= input :comment, :post_id, value: @post.id %></div>
 
-    </form>
+      </form>
     <% if @previous_request == @post_comment_request %>
       <script>document.body.scrollTop = 10000;</script>
     <% end %>
@@ -47,7 +47,7 @@
       <% if post != @post %>
         <div class="snippet">
           <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
-          <h5><%= post.body[0..200] + "..." %></h5>
+          <h5><%= html_tags_out(post.body) %></h5>
         </div>
       <% end %>
     <% end %>

@@ -10,7 +10,15 @@ ul {
 
 textarea {
   height: 400px;
-  width: 800px;
+  width: 700px;
+}
+
+img {
+  height: 270px;
+  width: 405px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 25px;
 }
 
 footer {

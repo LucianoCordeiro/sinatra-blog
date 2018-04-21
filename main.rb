@@ -126,6 +126,18 @@ get '/logout' do
   redirect '/login'
 end
 
+post '/save_image' do
+
+  @filename = params[:file][:filename]
+  file = params[:file][:tempfile]
+
+  File.open("./public/images/#{@filename}", 'wb') do |f|
+    f.write(file.read)
+  end
+  get_images
+  redirect '/new'
+end
+
 helpers do
 
   def formatted_count(comments_count)
@@ -156,6 +168,25 @@ helpers do
     if logged_in? == false
       redirect '/login'
     end
+  end
+
+  def html_tags_out(string)
+    new_string = ""
+    switch = true
+    string.each_char do |char|
+      if switch && char != "<" && char != ">"
+        new_string << char
+      elsif char == ">"
+        switch = true
+      elsif char == "<"
+        switch = false
+      end
+    end
+    new_string[0..200] + "..."
+  end
+
+  def get_images
+    $images = Dir.entries("public/images").select {|d| d.size > 2}
   end
 
 end

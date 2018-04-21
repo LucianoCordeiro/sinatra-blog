@@ -4,44 +4,52 @@
         <div class="text">
           <h2><%= @lastpost.title %></h2>
           <h5 class="title"><i>Criado por <b><%= @lastpost.user.name %></b> em <%= @lastpost.created_at.strftime("%d/%m/%Y") %></i></h5><br>
-          <h4><%= @lastpost.body %></h4>
+          <h4 class='body'><%= @lastpost.body %></h4>
         </div>
-
 
         <h4><%= formatted_count(@lastpost.comments.count) %></h4>
 
-        <% @lastpost.comments.each do |comment| %>
-          <ul>
-            <li><%= comment.author %></li>
-            <li><%= comment.body %></li>
-          </ul>
+        <div id="comment_box">
+          <% @lastpost.comments.each do |comment| %>
+            <div id="each_comment">
+              <h4 id="comment_title"><%= comment.author %></h4>
+              <h5 id="comment_bodye"><%= comment.body %></h5>
+              <h6>Postado em <%= comment.created_at.strftime("%d/%m/%Y") %></h6>
+            </div>
+          <% end %>
+        </div>
+
+        <% if @lastpost.comments.count > 0 %>
+          <h4>Deixe seu comentário:</h4>
         <% end %>
 
-        <%= form('/comments', :create) %>
+        <form action="/comments" method="post">
 
-        <ul>
-          <li><%= label :comment, :author %></li>
-          <li><%= input :comment, :author %></li>
+          <ul>
+            <li><input id="comment_author" name="comment[author]" type="text" placeholder="Nome"></li><br>
+            <li><textarea id="comment_body" name="comment[body]" placeholder="Insira seu texto..."></textarea></li>
+          </ul>
 
-          <li><%= label :comment, :body %></li>
-          <li><%= input :comment, :body %></li>
-        </ul>
+          <input type="submit" value="Enviar">
 
-        <%= submit  %>
+          <div style="visibility:hidden;"><%= input :comment, :post_id, value: @lastpost.id %></div>
 
-        <div style="visibility:hidden;"><%= input :comment, :post_id, value: @lastpost.id %></div>
-    <% end %>
+        </form>
+      <% end %>
 
   </div>
 
   <div class="col-lg-3 col-lg-offset-1">
+    <h4 class="mission" align="center">Missão desta página:
+      Traduzir os escritos e transmitir o pensamento dos principais filósofos e pensadores contemporâneos do mundo.
+    </h4>
     <h3 class="others">Últimas postagens:</h3>
     <% @posts.reverse.each do |post| %>
 
       <% if post.title != @lastpost.title %>
         <div class="snippet">
           <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
-          <h5><%= post.body[0..200] + "..."%></h5>
+          <h5><%= html_tags_out(post.body) %></h5>
         </div>
       <% end %>
 
