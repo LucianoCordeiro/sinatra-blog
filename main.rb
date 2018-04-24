@@ -190,7 +190,7 @@ helpers do
   end
 
   def get_images
-    $images = Dir.entries("public/images").select {|d| d.size > 2} || nil
+    $images = Dir.entries("public/images").select {|d| d.size > 1}
   end
 
 end
