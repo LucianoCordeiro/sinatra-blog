@@ -128,11 +128,10 @@ end
 
 post '/save_image' do
 
-  @filename = params[:file][:filename]
-  file = params[:file][:tempfile]
+  if params[:file] != nil
+    @filename = params[:file][:filename]
 
-  File.open("./public/images/#{@filename}", 'wb') do |f|
-    f.write(file.read)
+    File.open("./public/images/#{@filename}", 'wb')
   end
   redirect '/new'
 end
@@ -190,13 +189,11 @@ helpers do
   end
 
   def get_images
-    if folder_not_empty?
-      $images = Dir.entries("public/images").select {|d| d.size > 2}
-    end
+    $images = Dir.entries("public/images").select {|d| d.size > 2 && d != "in.jpeg"}
   end
 
-  def folder_not_empty?
-    Dir.entries("public/images").length > 2
+  def images_folder_size
+    Dir.entries("public/images").length - 3
   end
 
 end

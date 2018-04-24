@@ -20,7 +20,7 @@
 <div class="row" style="border-top: dashed #d3d3d3 1.5px;">
 
   <div class="col-lg-5">
-    <h3>Artigos</h3><br>
+    <h3>Artigos (<%= Post.count %>)</h3><br>
     <% @posts.each do |post| %>
 
       <ul class="inline">
@@ -36,8 +36,8 @@
   </div>
 
   <div class="col-lg-4">
-    <h3>Imagens</h3><br>
-    <% if folder_not_empty? %>
+    <h3>Imagens (<%= images_folder_size %>)</h3><br>
+
     <% $images.each do |img| %>
       <ul class="inline">
         <form class="input" action="/images/<%= img %>" method="post">
@@ -46,7 +46,6 @@
           <li><input type="submit" value="Excluir" onclick="return deletePost()"></li>
         </form>
       </ul>
-    <% end %>
     <% end %>
 
   </div>
@@ -58,3 +57,7 @@
     </form>
   </div>
 </div>
+
+<% if @previous_request == @post_comment_request %>
+  <script>document.body.scrollTop = 10000;</script>
+<% end %>
