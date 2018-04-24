@@ -56,7 +56,7 @@ end
 
 get '/new' do
   @user = User.find_by(id: session[:id])
-  get_images
+  get_images if $images != nil
   erb :'new.html'
 end
 
@@ -134,6 +134,11 @@ post '/save_image' do
   File.open("./public/images/#{@filename}", 'wb') do |f|
     f.write(file.read)
   end
+  redirect '/new'
+end
+
+delete '/images/:filename' do
+  File.delete("./public/images/#{params['filename']}")
   redirect '/new'
 end
 

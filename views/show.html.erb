@@ -42,6 +42,7 @@
       <h4 class="mission" align="center">Missão desta página:
         Traduzir os escritos e transmitir o pensamento dos principais filósofos e pensadores contemporâneos do mundo.
       </h4>
+    <% if @posts.size > 1 %>
     <h3 class="others">Veja também:</h3>
     <% @posts.reverse.take(7).each do |post| %>
       <% if post != @post %>
@@ -50,6 +51,7 @@
           <h5><%= html_tags_out(post.body) %></h5>
         </div>
       <% end %>
+    <% end %>
     <% end %>
   </div>
 </div>

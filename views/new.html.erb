@@ -1,9 +1,6 @@
 <h2><b>Painel de Controle</b></h2>
 <a href='/logout' style="font-size:15px;">Encerrar Sessão</a><br>
 <h4 style="color:green;">Olá, <%= @user.name %>!</h4>
-<% session.each do |s| %>
-<%= s %>
-<% end %>
 <h3>Criar Artigo</h3><br>
 
 <form action="/posts" method="post">
@@ -22,28 +19,36 @@
 
 <div class="row" style="border-top: dashed #d3d3d3 1.5px;">
 
-  <div class="col-lg-6">
+  <div class="col-lg-5">
     <h3>Artigos</h3><br>
-  <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
 
-  <ul class="inline">
-    <form class="input" action="/artigos/<%= post.id %>" method="post">
-      <input type="hidden" name="_method" value="DELETE">
-      <li><%= post.title %></li>
-      <li><a class="edit_delete" href="/artigos/<%= converter(post.title) %>/edit">Editar</a></li>
-      <li><input type="submit" value="Excluir" onclick="return deletePost()"></li>
-    </form>
-  </ul>
-  <% end %>
+      <ul class="inline">
+        <form class="input" action="/artigos/<%= post.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <li><%= post.title %></li>
+          <li><a class="edit_delete" href="/artigos/<%= converter(post.title) %>/edit">Editar</a></li>
+          <li><input type="submit" value="Excluir" onclick="return deletePost()"></li>
+        </form>
+      </ul>
+
+    <% end %>
   </div>
-  <div class="col-lg-2">
+
+  <div class="col-lg-4">
     <h3>Imagens</h3><br>
     <% $images.each do |img| %>
-      <a href="/images/<%= img %>"><h5><%= img %></h5></a>
+      <ul class="inline">
+        <form class="input" action="/images/<%= img %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <li><a href="/images/<%= img %>"><%= img %></a></li>
+          <li><input type="submit" value="Excluir" onclick="return deletePost()"></li>
+        </form>
+      </ul>
     <% end %>
 
   </div>
-  <div class="col-lg-3 col-lg-offset-1">
+  <div class="col-lg-3">
     <h4>Upload de Imagens</h4><br>
     <form action="/save_image" method="POST" enctype="multipart/form-data">
       <input type="file" name="file"><br>

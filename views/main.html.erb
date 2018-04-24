@@ -35,6 +35,9 @@
           <div style="visibility:hidden;"><%= input :comment, :post_id, value: @lastpost.id %></div>
 
         </form>
+
+      <% else %>
+        <h2>Nenhum artigo publicado.</h2>
       <% end %>
 
   </div>
@@ -43,16 +46,18 @@
     <h4 class="mission" align="center">Missão desta página:
       Traduzir os escritos e transmitir o pensamento dos principais filósofos e pensadores contemporâneos do mundo.
     </h4>
-    <h3 class="others">Últimas postagens:</h3>
-    <% @posts.reverse.each do |post| %>
+    <% if @posts.size > 1 %>
+      <h3 class="others">Últimas postagens:</h3>
+      <% @posts.reverse.each do |post| %>
 
-      <% if post.title != @lastpost.title %>
-        <div class="snippet">
-          <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
-          <h5><%= html_tags_out(post.body) %></h5>
-        </div>
+        <% if post.title != @lastpost.title %>
+          <div class="snippet">
+            <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
+            <h5><%= html_tags_out(post.body) %></h5>
+          </div>
+        <% end %>
+
       <% end %>
-
     <% end %>
   </div>
 </div>
