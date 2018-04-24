@@ -5,14 +5,6 @@ require 'sinatra/reloader' if development?
 require 'rack-flash'
 require_relative 'models.rb'
 
-configure :development do
-  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'translation_site', pool: 2, username: 'lucci', password: 'axswy'}
-end
-
-configure :production do
-  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'translation_site', pool: 2, username: 'lucci', password: 'axswy'}
-end
-
 set :erb, layout: :'layout.html'
 enable :sessions
 use Rack::Flash

@@ -1,0 +1,15 @@
+development:
+  default: &default
+  adapter: postgresql
+  database: translation_site
+  username: lucci
+  password: axswy
+  host: localhost
+
+production:
+  default: &default
+  adapter: postgresql
+  database: translation_site
+  username: lucci
+  password: axswy
+  host: localhost
