@@ -56,7 +56,7 @@ end
 
 get '/new' do
   @user = User.find_by(id: session[:id])
-  get_images if $images != nil
+  get_images
   erb :'new.html'
 end
 
@@ -190,7 +190,7 @@ helpers do
   end
 
   def get_images
-    $images = Dir.entries("public/images").select {|d| d.size > 2}
+    $images = Dir.entries("public/images").select {|d| d.size > 2} || nil
   end
 
 end
