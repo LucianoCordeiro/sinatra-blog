@@ -26,6 +26,7 @@ GEM
     minitest (5.11.3)
     multi_json (1.13.1)
     mustermann (1.0.2)
+    pg (1.0.0-x86-mingw32)
     rack (2.0.4)
     rack-flash3 (1.0.5)
       rack
@@ -59,6 +60,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt!
+  pg
   rack-flash3
   rake
   sinatra

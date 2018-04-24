@@ -1,7 +1,9 @@
 <h2><b>Painel de Controle</b></h2>
 <a href='/logout' style="font-size:15px;">Encerrar Sessão</a><br>
 <h4 style="color:green;">Olá, <%= @user.name %>!</h4>
-
+<% session.each do |s| %>
+<%= s %>
+<% end %>
 <h3>Criar Artigo</h3><br>
 
 <form action="/posts" method="post">

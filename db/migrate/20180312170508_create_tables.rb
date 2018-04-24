@@ -9,6 +9,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :posts do |t|
       t.belongs_to :user, index: true
       t.string :title
+      t.string :writter
       t.string :body
       t.timestamps
     end
@@ -16,6 +17,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :comments do |t|
       t.belongs_to :post, index: true
       t.string :author
+      t.string :email
       t.string :body
       t.timestamps
     end

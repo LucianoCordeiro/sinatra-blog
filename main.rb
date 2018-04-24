@@ -5,7 +5,14 @@ require 'sinatra/reloader' if development?
 require 'rack-flash'
 require_relative 'models.rb'
 
-set :database, {adapter: "sqlite3", database: "art_site.sqlite3"}
+configure :development do
+  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'translation_site', pool: 2, username: 'lucci', password: 'axswy'}
+end
+
+configure :production do
+  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'translation_site', pool: 2, username: 'lucci', password: 'axswy'}
+end
+
 set :erb, layout: :'layout.html'
 enable :sessions
 use Rack::Flash
@@ -57,6 +64,7 @@ end
 
 get '/new' do
   @user = User.find_by(id: session[:id])
+  get_images
   erb :'new.html'
 end
 
@@ -134,7 +142,6 @@ post '/save_image' do
   File.open("./public/images/#{@filename}", 'wb') do |f|
     f.write(file.read)
   end
-  get_images
   redirect '/new'
 end
 

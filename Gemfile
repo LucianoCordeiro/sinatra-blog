@@ -8,3 +8,4 @@ gem "rake"
 gem 'sinatra-formhelpers-ng'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 gem 'rack-flash3'
+gem 'pg'
