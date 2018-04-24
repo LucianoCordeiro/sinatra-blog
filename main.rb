@@ -190,7 +190,13 @@ helpers do
   end
 
   def get_images
-    $images = Dir.entries("public/images").select {|d| d.size > 1}
+    if folder_not_empty?
+      $images = Dir.entries("public/images").select {|d| d.size > 2}
+    end
+  end
+
+  def folder_not_empty?
+    Dir.entries("public/images").length > 2
   end
 
 end

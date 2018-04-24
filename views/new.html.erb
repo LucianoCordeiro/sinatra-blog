@@ -37,6 +37,7 @@
 
   <div class="col-lg-4">
     <h3>Imagens</h3><br>
+    <% if folder_not_empty? %>
     <% $images.each do |img| %>
       <ul class="inline">
         <form class="input" action="/images/<%= img %>" method="post">
@@ -45,6 +46,7 @@
           <li><input type="submit" value="Excluir" onclick="return deletePost()"></li>
         </form>
       </ul>
+    <% end %>
     <% end %>
 
   </div>
