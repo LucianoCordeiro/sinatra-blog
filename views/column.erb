@@ -1,0 +1,16 @@
+<div class="col-lg-3 col-lg-offset-1">
+    <h4 class="mission" align="center">Missão dos tradutores:
+      Traduzir os escritos e transmitir o pensamento dos principais filósofos e pensadores contemporâneos do mundo.
+    </h4>
+  <% if @posts.size > 1 %>
+    <h3 class="others">Veja também:</h3>
+    <% @posts.reverse.take(7).each do |post| %>
+      <% if post != @post %>
+        <div class="snippet">
+          <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
+          <h5>Por <%= post.writter %> | <%= html_tags_out(post.body) %></h5>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

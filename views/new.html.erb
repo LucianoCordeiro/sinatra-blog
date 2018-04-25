@@ -10,6 +10,10 @@
     <li><%= input :post, :title %></li>
   </ul>
   <ul>
+    <li><%= label :post, :writter %></li>
+    <li><%= input :post, :writter %></li>
+  </ul>
+  <ul>
     <li><%= label :post, :body %></li>
     <li><textarea id="post_body" name="post[body]"></textarea></li>
   </ul>
@@ -58,6 +62,8 @@
   </div>
 </div>
 
-<% if @previous_request == @post_comment_request %>
-  <script>document.body.scrollTop = 10000;</script>
+<% @control_panel_request.each do |request| %>
+  <% if request == @previous_request %>
+    <script>document.body.scrollTop = 10000;</script>
+  <% end %>
 <% end %>

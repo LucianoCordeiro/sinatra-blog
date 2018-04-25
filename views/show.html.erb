@@ -2,8 +2,9 @@
   <div class="col-lg-8">
     <div class="text">
       <h2><%= @post.title %></h2>
-      <h5><i>Publicado por <b><%= @post.user.name %></b> em <%= @post.created_at.strftime("%d/%m/%Y") %></i></h5><br>
-      <h4 class='body'><%= @post.body %></h4>
+      <h5><i>Por <b><%= @post.writter %></b>. Publicado em <%= @post.created_at.strftime("%d/%m/%Y") %></i></h5><br>
+      <h4 class='body'><%= @post.body %></h4><br>
+      <h5>>> Traduzido por <b><%= @post.user.name.capitalize %></b></h5>
     </div>
 
     <h4><%= formatted_count(@comments.count) %></h4>
@@ -21,10 +22,17 @@
       <h4>Deixe seu comentário:</h4>
     <% end %>
 
+    <% if flash.has?(:error) %>
+      <div id="error">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+    <small>*Campos obrigatórios. O email não será publicado.</small>
     <form action="/comments" method="post">
 
       <ul>
-        <li><input id="comment_author" name="comment[author]" type="text" placeholder="Nome"></li><br>
+        <li><input id="comment_author" name="comment[author]" type="text" placeholder="Nome*"></li><br>
+        <li><input id="comment_email" name="comment[email]" type="text" placeholder="Email*"></li><br>
         <li><textarea id="comment_body" name="comment[body]" placeholder="Insira seu texto..."></textarea></li>
       </ul>
 
@@ -38,20 +46,5 @@
     <% end %>
   </div>
 
-  <div class="col-lg-3 col-lg-offset-1">
-      <h4 class="mission" align="center">Missão desta página:
-        Traduzir os escritos e transmitir o pensamento dos principais filósofos e pensadores contemporâneos do mundo.
-      </h4>
-    <% if @posts.size > 1 %>
-    <h3 class="others">Veja também:</h3>
-    <% @posts.reverse.take(7).each do |post| %>
-      <% if post != @post %>
-        <div class="snippet">
-          <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
-          <h5><%= html_tags_out(post.body) %></h5>
-        </div>
-      <% end %>
-    <% end %>
-    <% end %>
-  </div>
+  <%= erb :column, :layout => false %>
 </div>

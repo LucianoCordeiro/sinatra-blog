@@ -4,17 +4,11 @@ require 'sinatra/form_helpers'
 require 'sinatra/reloader' if development?
 require 'rack-flash'
 require_relative 'models.rb'
+require_relative 'helpers.rb'
 
 set :erb, layout: :'layout.html'
 enable :sessions
 use Rack::Flash
-
-class Search
-  attr_reader :input
-  def initialize(input)
-    @input = input
-  end
-end
 
 before do
   params.delete(:captures)
@@ -56,6 +50,8 @@ end
 
 get '/new' do
   @user = User.find_by(id: session[:id])
+  @previous_request = session[:previous_path]
+  @control_panel_request = [session[:delete_post_path], session[:save_image_path], session[:delete_image_path]]
   get_images
   erb :'new.html'
 end
@@ -70,10 +66,12 @@ end
 post '/comments' do
   @comment = Comment.create(params[:comment])
   @comment.body.gsub!(/\n+/, '<br>')
-  if @comment.save
-    session[:post_comment_path] = request.url
-    redirect "/artigos/#{converter(@comment.post.title)}"
+  session[:post_comment_path] = request.url
+  if !@comment.save
+    flash[:error] = "Nome e/ou email inválidos"
   end
+  redirect "/artigos/#{converter(@comment.post.title)}"
+
 end
 
 get '/artigos/:title/edit' do
@@ -89,6 +87,7 @@ end
 
 delete '/artigos/:id' do
   Post.destroy(params['id'])
+  session[:delete_post_path] = request.url
   redirect '/new'
 end
 
@@ -96,7 +95,7 @@ post '/search' do
   search = Search.new(params[:search][:input])
   previous_path = session[:previous_path]
   redirect "#{previous_path}" if search.input == ""
-  session[:input] = search.input
+  session[:input] = search.input.downcase
   redirect '/search'
 end
 
@@ -133,67 +132,12 @@ post '/save_image' do
 
     File.open("./public/images/#{@filename}", 'wb')
   end
+  session[:save_image_path] = request.url
   redirect '/new'
 end
 
 delete '/images/:filename' do
   File.delete("./public/images/#{params['filename']}")
+  session[:delete_image_path] = request.url
   redirect '/new'
-end
-
-helpers do
-
-  def formatted_count(comments_count)
-    if comments_count == 0
-      "Nenhum comentário. Seja o primeiro a comentar!"
-    elsif comments_count == 1
-      "1 comentário"
-    else
-      "#{comments_count} comentários"
-    end
-  end
-
-  def converter(title)
-    title.force_encoding('UTF-8')
-    return title if !title.include?('_') && !title.include?(' ')
-    title.include?('_') ? title.gsub('_', ' ') : title.gsub(' ', '_')
-  end
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:id])
-  end
-
-  def logged_in?
-    current_user != nil
-  end
-
-  def logged_in_user?
-    if logged_in? == false
-      redirect '/login'
-    end
-  end
-
-  def html_tags_out(string)
-    new_string = ""
-    switch = true
-    string.each_char do |char|
-      if switch && char != "<" && char != ">"
-        new_string << char
-      elsif char == ">"
-        switch = true
-      elsif char == "<"
-        switch = false
-      end
-    end
-    new_string[0..200] + "..."
-  end
-
-  def get_images
-    $images = Dir.entries("public/images").select {|d| d.size > 2 && d != "in.jpeg"}
-  end
-
-  def images_folder_size
-    Dir.entries("public/images").length - 3
-  end
-
 end

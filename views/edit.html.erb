@@ -5,6 +5,10 @@
   <li><%= input :post, :title, value: @post.title %></li>
 </ul>
 <ul>
+  <li><%= label :post, :writter %></li>
+  <li><%= input :post, :writter, value: @post.writter %></li>
+</ul>
+<ul>
   <li><%= label :post, :body %></li>
   <li><textarea id="post_body" name="post[body]"><%= @post.body %></textarea></li>
 </ul>

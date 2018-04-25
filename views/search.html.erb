@@ -1,14 +1,27 @@
-<div class="search_result">
+<div class="row">
+  <div class="col-lg-8">
 
-  <div id="search_result">
-    <h3>Artigos encontrados:</h3><br>
-    <% @posts.each do |post| %>
-      <% if post.title =~ @search_input %>
-        <h4><a href="artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
-      <% end %>
-    <% end %>
-    <br>
+    <div class="search_result">
+
+      <div id="search_result">
+        <h3>Artigos encontrados:</h3><br>
+        <div class="counter" style="visibility:hidden"><%= i = 0 %></div>
+        <% @posts.each do |post| %>
+          <% if post.title.downcase =~ @search_input || post.writter.downcase =~ @search_input %>
+            <h4><a href="artigos/<%= converter(post.title) %>"><%= post.title %></a> | <%= post.writter %></h4>
+          <% else %>
+            <div class="counter" style="visibility:hidden"><%= i += 1 %></div>
+          <% end %>
+        <% end %><br>
+        <% if i == Post.count %>
+          <h4>Nenhum artigo encontrado.</h4><br>
+          <% end %>
+      </div>
+
+
+    </div>
     <h5><a href="/">Voltar</a></h5>
   </div>
 
+  <%= erb :column, :layout => false %>
 </div>
