@@ -129,8 +129,11 @@ post '/save_image' do
 
   if params[:file] != nil
     @filename = params[:file][:filename]
+    file = params[:file][:tempfile]
 
-    File.open("./public/images/#{@filename}", 'wb')
+    File.open("./public/images/#{@filename}", 'wb') do |f|
+      f.write(file.read)
+    end
   end
   session[:save_image_path] = request.url
   redirect '/new'
