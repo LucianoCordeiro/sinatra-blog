@@ -1,0 +1,37 @@
+<html>
+  <head>
+    
+    <title><%= @title %></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/application.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/javascripts/myscript.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <h1><i><a class="header" href="/">Pensamentos Traduzidos</a></i></h1>
+            </div>
+            <div id="search" class="col-lg-6">
+              <form action="/search" method="post">
+                <input id="search_input" name="search[input]" type="text" placeholder="Procurar artigo ou autor">
+                <button id="button_search" type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <footer>
+      <h5>Contato: lucianocordeiro1991@hotmail.com</h5>
+      <small>Powered by Luciano Cesar - All Rights Reserved</small>
+    </footer>
+  </body>
+</html>

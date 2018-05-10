@@ -30,19 +30,9 @@ helpers do
     end
   end
 
-  def html_tags_out(string)
-    new_string = ""
-    switch = true
-    string.each_char do |char|
-      if switch && char != "<" && char != ">"
-        new_string << char
-      elsif char == ">"
-        switch = true
-      elsif char == "<"
-        switch = false
-      end
-    end
-    new_string[0..200] + "..."
+  def html_tags_out(text)
+    text.gsub!(/<[^>]+>/, '')
+    text[0..200] + "..."
   end
 
   def get_images

@@ -1,4 +1,4 @@
-require_relative '../models.rb'
+require_relative '../app/models.rb'
 
 User.create(name: "luciano", password: "tart13")
 
