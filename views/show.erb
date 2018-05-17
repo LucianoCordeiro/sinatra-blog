@@ -2,9 +2,9 @@
   <div class="col-lg-8">
     <div class="text">
       <h2><%= @post.title %></h2>
-      <h5><i>Por <b><%= @post.writter %></b>. Publicado em <%= @post.created_at.strftime("%d/%m/%Y") %>.
-      <a href="<%= @post.source %>">Versão original</a></i></h5><br>
-      <div class="body"><%= @post.body %></div><br>
+      <h5><i>Por <b><%= @post.writter %></b> | Publicado em <%= @post.created_at.strftime("%d/%m/%Y") %> |
+      Versão original: <a href="<%= @post.source %>"><%= @post.name_source %></a></i></h5><br>
+      <div class="body"><%= @post.body %></div>
       <h5>*Traduzido por <b><%= @post.user.name.capitalize %> Cesar</b></h5><br>
 
       <div class="col-sm-6">

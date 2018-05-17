@@ -11,6 +11,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :writter
       t.string :source
+      t.string :name_source
       t.string :body
       t.string :route
       t.timestamps

@@ -3,9 +3,9 @@
     <% if Post.count > 0 %>
         <div class="text">
           <h2><%= @lastpost.title %></h2>
-          <h5><i>Por <b><%= @lastpost.writter %></b>. Publicado em <%= @lastpost.created_at.strftime("%d/%m/%Y") %>.
-            <a href="<%= @lastpost.source %>">Versão original</a></i></h5><br>
-          <div class="body"><%= @lastpost.body %></div><br>
+          <h5><i>Por <b><%= @lastpost.writter %></b> | Publicado em <%= @lastpost.created_at.strftime("%d/%m/%Y") %> |
+          Versão original: <a href="<%= @lastpost.source %>"><%= @lastpost.name_source %></a></i></h5><br>
+          <div class="body"><%= @lastpost.body %></div>
           <h5>*Traduzido por <b><%= @lastpost.user.name.capitalize %> Cesar</b></h5><br>
 
           <div class="col-sm-6">

@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180312170508) do
     t.string "title"
     t.string "writter"
     t.string "source"
+    t.string "name_source"
     t.string "body"
     t.string "route"
     t.datetime "created_at", null: false
