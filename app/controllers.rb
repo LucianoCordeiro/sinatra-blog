@@ -23,12 +23,13 @@ end
 end
 
 get '/' do
-  @title = 'Home Page'
   @lastpost = Post.last
+  @title = @lastpost.title
   erb :main
 end
 
 get '/artigos/:route' do
+  @title = @post.title
   @comments = @post.comments
   @previous_request = session[:previous_path]
   @post_comment_request = session[:post_comment_path]
