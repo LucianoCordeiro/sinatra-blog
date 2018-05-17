@@ -45,8 +45,9 @@ User.create(name: "luciano", password: "tart13")
              )
 end
 
-Comment.create(author:"Jenas Lucas",
-               post_id: 1,
-               body: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-               diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-               volutpat.")
+Comment.create!(author:"Jenas Lucas",
+                email: "jenas@lucas.com.br",
+                post_id: 1,
+                body: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+                volutpat.")

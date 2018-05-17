@@ -4,19 +4,19 @@
       <h2><%= @post.title %></h2>
       <h5><i>Por <b><%= @post.writter %></b>. Publicado em <%= @post.created_at.strftime("%d/%m/%Y") %>.
       <a href="<%= @post.source %>">Versão original</a></i></h5><br>
-        <div class="body"><%= @post.body %></div>
+      <div class="body"><%= @post.body %></div><br>
       <h5>*Traduzido por <b><%= @post.user.name.capitalize %> Cesar</b></h5><br>
 
-        <div class="col-sm-6">
-          <% if next_post(@post) != nil %>
-            <h4 class="switch">Próximo: <a href="/artigos/<%= next_post(@post).route %>"><%= next_post(@post).title %></a></h4>
-          <% end %>
-        </div>
-        <div class="col-sm-6">
-          <% if previous_post(@post) != nil %>
-            <h4 class="switch">Anterior: <a href="/artigos/<%= previous_post(@post).route %>"><%= previous_post(@post).title %></a></h4>
-          <% end %>
-        </div>
+      <div class="col-sm-6">
+        <% if next_post(@post) != nil %>
+          <h4 class="switch">Próximo: <a href="/artigos/<%= next_post(@post).route %>"><%= next_post(@post).title %></a></h4>
+        <% end %>
+      </div>
+      <div class="col-sm-6">
+        <% if previous_post(@post) != nil %>
+          <h4 class="switch">Anterior: <a href="/artigos/<%= previous_post(@post).route %>"><%= previous_post(@post).title %></a></h4>
+        <% end %>
+      </div>
 
     </div>
 
