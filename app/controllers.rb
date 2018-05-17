@@ -10,14 +10,13 @@ after do
   session[:previous_path] = request.url
 end
 
-['/artigos/:title', '/artigos/:title/edit'].each do |path|
+['/artigos/:route', '/artigos/:route/edit'].each do |path|
   before path do
-    @title = converter(params['title'])
-    @post = Post.find_by(title: @title)
+    @post = Post.find_by(route: params['route'])
   end
 end
 
-['/', '/new', '/search', '/artigos/:title'].each do |path|
+['/', '/new', '/search', '/artigos/:route'].each do |path|
   before path do
     @posts = Post.all
   end
@@ -29,7 +28,7 @@ get '/' do
   erb :main
 end
 
-get '/artigos/:title' do
+get '/artigos/:route' do
   @comments = @post.comments
   @previous_request = session[:previous_path]
   @post_comment_request = session[:post_comment_path]
@@ -46,6 +45,7 @@ end
 
 post '/posts' do
   @post = Post.create(params[:post])
+  @post.route = route_maker(@post.title)
   if @post.save
     redirect '/new'
   end
@@ -58,15 +58,16 @@ post '/comments' do
   if !@comment.save
     flash[:error] = "Nome e/ou email inválidos"
   end
-  redirect "/artigos/#{converter(@comment.post.title)}"
+  redirect "/artigos/#{@comment.post.route}"
 
 end
 
-get '/artigos/:title/edit' do
+get '/artigos/:route/edit' do
   erb :edit
 end
 
-put '/artigos/:title' do
+put '/artigos/:route' do
+  @post.route = route_maker(@post.title)
   if @post.update(params[:post])
     redirect '/new'
   end

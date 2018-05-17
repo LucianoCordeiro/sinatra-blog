@@ -10,10 +10,14 @@ helpers do
     end
   end
 
-  def converter(title)
-    title.force_encoding('UTF-8')
-    return title if !title.include?('_') && !title.include?(' ')
-    title.include?('_') ? title.gsub('_', ' ') : title.gsub(' ', '_')
+  SPECIAL_CHARACTERS = {' ' => '_', 'á' => 'a', 'é' => 'e',
+  'ó' => 'o', 'í' => 'i', 'ú' => 'u', 'õ' => 'o', 'ã' => 'a',
+  'â' => 'a', 'ê' => 'e', 'ô' => 'o', '?' => ''}
+
+  def route_maker(title)
+    route = title.downcase
+    SPECIAL_CHARACTERS.each {|key,value| route.gsub!(key, value)}
+    route
   end
 
   def current_user
@@ -28,6 +32,17 @@ helpers do
     if logged_in? == false
       redirect '/login'
     end
+  end
+
+  def previous_post(post)
+    return nil if @posts[0] == post
+    return  @posts[@posts.index(post) - 1]
+  end
+
+  def next_post(post)
+    next_post = @posts[@posts.index(post) + 1]
+    return next_post if next_post != nil
+    return nil
   end
 
   def html_tags_out(text)

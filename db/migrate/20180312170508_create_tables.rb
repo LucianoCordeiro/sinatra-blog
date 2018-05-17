@@ -10,7 +10,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.belongs_to :user, index: true
       t.string :title
       t.string :writter
+      t.string :source
       t.string :body
+      t.string :route
       t.timestamps
     end
 

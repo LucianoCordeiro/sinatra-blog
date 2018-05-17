@@ -7,8 +7,8 @@
     <% @posts.reverse.take(7).each do |post| %>
       <% if post != @post %>
         <div class="snippet">
-          <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
-          <h5>Por <%= post.writter %> | <%= html_tags_out(post.body) %></h5>
+          <h4><a href="/artigos/<%= post.route %>"><%= post.title %></a></h4>
+          <h5>Por <%= post.writter %> | <%= html_tags_out(post.body) %> <a href="/artigos/<%= post.route %>">Leia mais</a></h5>
         </div>
       <% end %>
     <% end %>

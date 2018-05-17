@@ -1,4 +1,4 @@
-<%= form("/artigos/#{converter(@post.title)}", :put) %>
+<%= form("/artigos/#{@post.route}", :put) %>
 
 <ul>
   <li><%= label :post, :title %></li>
@@ -7,6 +7,10 @@
 <ul>
   <li><%= label :post, :writter %></li>
   <li><%= input :post, :writter, value: @post.writter %></li>
+</ul>
+<ul>
+  <li><%= label :post, :source %></li>
+  <li><%= input :post, :source, value: @post.writter %></li>
 </ul>
 <ul>
   <li><%= label :post, :body %></li>

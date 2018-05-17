@@ -14,6 +14,10 @@
     <li><%= input :post, :writter %></li>
   </ul>
   <ul>
+    <li><%= label :post, :source %></li>
+    <li><%= input :post, :source %></li>
+  </ul>
+  <ul>
     <li><%= label :post, :body %></li>
     <li><textarea id="post_body" name="post[body]"></textarea></li>
   </ul>
@@ -31,7 +35,7 @@
         <form class="input" action="/artigos/<%= post.id %>" method="post">
           <input type="hidden" name="_method" value="DELETE">
           <li><%= post.title %></li>
-          <li><a class="edit_delete" href="/artigos/<%= converter(post.title) %>/edit">Editar</a></li>
+          <li><a class="edit_delete" href="/artigos/<%= post.route %>/edit">Editar</a></li>
           <li><input type="submit" value="Excluir" onclick="return deletePost()"></li>
         </form>
       </ul>

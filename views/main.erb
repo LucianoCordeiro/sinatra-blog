@@ -3,9 +3,11 @@
     <% if Post.count > 0 %>
         <div class="text">
           <h2><%= @lastpost.title %></h2>
-          <h5><i>Por <b><%= @lastpost.writter %></b>. Publicado em <%= @lastpost.created_at.strftime("%d/%m/%Y") %></i></h5><br>
-          <h4 class='body'><%= @lastpost.body %></h4><br>
-          <h5>>> Traduzido por <b><%= @lastpost.user.name.capitalize %> Cesar</b></h5>
+          <h5><i>Por <b><%= @lastpost.writter %></b>. Publicado em <%= @lastpost.created_at.strftime("%d/%m/%Y") %>.
+            <a href="<%= @lastpost.source %>">Versão original</a></i></h5><br>
+          <div class="body"><%= @lastpost.body %></div><br>
+          <h5>>> Traduzido por <b><%= @lastpost.user.name.capitalize %> Cesar</b></h5><br>
+          <h4 class="switch"><% if next_post(@lastpost) != nil %>Próximo: <a href="/artigos/<%= next_post(@lastpost).route %>"><%= next_post(@lastpost).title %></a><% end %>  |  <% if previous_post(@lastpost) != nil %>Anterior: <a href="/artigos/<%= previous_post(@lastpost).route %>"><%= previous_post(@lastpost).title %></a><% end %></h4>
         </div>
 
         <h4><%= formatted_count(@lastpost.comments.count) %></h4>
@@ -54,8 +56,8 @@
 
         <% if post.title != @lastpost.title %>
           <div class="snippet">
-            <h4><a href="/artigos/<%= converter(post.title) %>"><%= post.title %></a></h4>
-            <h5>Por <%= post.writter %> | <%= html_tags_out(post.body) %></h5>
+            <h4><a href="/artigos/<%= post.route %>"><%= post.title %></a></h4>
+            <h5>Por <%= post.writter %> | <%= html_tags_out(post.body) %><a href="/artigos/<%= post.route %>"> Leia mais</a></h5>
           </div>
         <% end %>
 
