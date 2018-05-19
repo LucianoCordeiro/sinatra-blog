@@ -1,6 +1,8 @@
+
 body {
   text-align: left;
-  font-family: Times New Roman;
+  font-family: Georgia;
+  color: #262626;
 }
 
 ul {
@@ -31,6 +33,7 @@ footer {
 
 h1 a {
   color: white;
+  font-family: Times New Roman;
 }
 
 h1 a:hover {
@@ -166,13 +169,20 @@ h1 a:hover {
 
 @media screen and (max-width: 980px) {
 
-  body {
-    text-align: left;
-    font-family: 'Crimson Text', serif;
+  .jumbotron {
+    height: 70px !important;
+  }
+
+  .jumbotron h1 {
+    margin-top: -25px;
+  }
+
+  li i {
+    font-size: 35px;
   }
 
   h1 {
-    font-size: 55px !important;
+    font-size: 45px !important;
   }
 
   h2 {
@@ -196,7 +206,7 @@ h1 a:hover {
   }
 
   p {
-    font-size: 38px;
+    font-size: 41px;
   }
 
   .jumbotron {
