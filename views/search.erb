@@ -8,7 +8,7 @@
         <div class="counter" style="visibility:hidden"><%= i = 0 %></div>
         <% @posts.each do |post| %>
           <% if post.title.downcase =~ @search_input || post.writter.downcase =~ @search_input %>
-            <h4><a href="artigos/<%= converter(post.title) %>"><%= post.title %></a> | <%= post.writter %></h4>
+            <h4><a href="artigos/<%= post.route %>"><%= post.title %></a> | <%= post.writter %></h4>
           <% else %>
             <div class="counter" style="visibility:hidden"><%= i += 1 %></div>
           <% end %>
