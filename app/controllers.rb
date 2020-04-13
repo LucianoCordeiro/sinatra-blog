@@ -1,4 +1,5 @@
 before do
+  redirect request.url.sub('http', 'https') unless request.secure?
   params.delete(:captures)
 end
 
